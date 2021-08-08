@@ -3,9 +3,9 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
-import React from 'react'
 
-export default function Navbar() {
+export default function Navbar(props) {
+
     return (
         <nav className="navbar row">
             <div className="company col-md-3">Shoppie</div>
@@ -15,10 +15,11 @@ export default function Navbar() {
             </div>
             <div className="icons col-md-3">
                 <span className="users"><IconButton><PersonOutlineIcon /></IconButton></span>
-                <span className="cart"><IconButton><Badge color="secondary" badgeContent={1}>
+                <span className="cart"><IconButton onClick={() => props.handleCart()}><Badge color="secondary" badgeContent={props.count}>
                     <ShoppingCartIcon />
                 </Badge></IconButton></span>
             </div>
+
         </nav>
 
     )

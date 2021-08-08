@@ -1,5 +1,8 @@
 .mainnav {
   background-color: #ff7a8d;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .company {
@@ -163,4 +166,75 @@ body {
 }
 .cartadd button {
   width: 90%;
+}
+.Cartbox {
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow-x: hidden;
+  position: fixed;
+  top: 20;
+  right: 0;
+  height: 100%;
+  z-index: 5;
+  transition: 0.5s;
+  padding-top: 0.5rem;
+}
+
+.noItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18rem;
+}
+.noItems h4 {
+  align-self: center;
+  color: #b10037;
+}
+.closeIcon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pricerow {
+  font-size: 0.8rem;
+  color: #2b3445;
+}
+.cartcard {
+  border: 1px solid #b100387c;
+  margin-top: 0.4rem;
+  padding: 0.3rem;
+  background-color: #ff7a8e1c !important;
+}
+.carttitle,
+.cartprice {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #e94560;
+}
+
+.totalvalue {
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem 1rem;
+  position: fixed;
+  bottom: 0;
+}
+
+.subtotal {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #e94560;
+}
+.subtotalvalue {
+  padding: 1rem;
+}
+.checkoutbtn {
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+}
+.checkoutbtn > button {
+  width: 100%;
+}
+.closeiconx {
+  cursor: pointer;
 }
