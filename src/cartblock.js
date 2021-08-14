@@ -1,22 +1,23 @@
 import React from 'react';
 import CartCard from './cartCard';
-export default function Cartblock(props) {
+export default function Cartblock({ status, items, finaltotal, handleclose, handlecalc }) {
+
     return (
-        <div className="Cartbox" style={{ width: props.status ? "20%" : '0', borderLeft: props.status ? '3px solid #e94560' : '' }}>
+        <div className={`Cartbox ${status ? 'cart-side-box' : 'close-side-box'}`}>
             <div className="container-fluid">
-                <div className={props.items.length === 0 ? 'row noItemsrow' : 'row'}>
-                    <div className={props.items.length === 0 ? 'col-12 noItems' : 'col-12'} >
-                        <h4>{props.items.length === 0 ? 'No items in the cart' : props.items.length + 'items'}  </h4>
+                <div className={items.length === 0 ? 'row noItemsrow' : 'row'}>
+                    <div className={items.length === 0 ? 'col-12 noItems' : 'col-12'} >
+                        <h4>{items.length === 0 ? 'No items in the cart' : items.length + 'items'}  </h4>
                     </div>
                 </div>
                 <div>
-                    {props.items.map((obj) => {
-                        return <CartCard key={obj.id} data={obj} handlecartclose={props.handleclose} calc={props.handlecalc()} />
+                    {items.map((obj) => {
+                        return <CartCard key={obj.id} data={obj} handlecartclose={handleclose} calc={handlecalc()} />
                     })}
                 </div>
-                {props.items.length === 0 ? '' :
+                {items.length === 0 ? '' :
                     < div className="totalvalue row">
-                        <div className="subtotalvalue">{props.items.length === 0 ? '' : 'Sub-total: '}<span className="subtotal">Rs. {props.finaltotal}</span></div>
+                        <div className="subtotalvalue">{items.length === 0 ? '' : 'Sub-total: '}<span className="subtotal">Rs. {finaltotal}</span></div>
                         <div className="checkoutbtn"><button className="btn btn-outline-danger">Check out</button></div>
                     </div>
                 }

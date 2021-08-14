@@ -4,13 +4,17 @@
   top: 0;
   z-index: 10;
 }
-
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
 .company {
   color: #b10037;
   font-size: 2rem;
   font-weight: bolder;
   font-style: italic;
   display: inline-block;
+  width: 25%;
   text-shadow: 1px 1px #e6e6e6;
   padding: 0rem 1rem;
   align-self: center;
@@ -54,13 +58,13 @@ body {
 .cart {
   background-color: rgba(217, 217, 252, 0.1);
   border-radius: 50%;
-  /* padding: 0.75rem; */
   margin: 0 1rem;
 }
 .icons {
   display: flex;
   justify-content: flex-end;
 }
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -228,7 +232,6 @@ body {
   padding: 1rem;
 }
 .checkoutbtn {
-  /* width: 100%; */
   display: flex;
   justify-content: center;
 }
@@ -237,4 +240,39 @@ body {
 }
 .closeiconx {
   cursor: pointer;
+}
+.cart-side-box {
+  width: 20%;
+  border-left: 3px solid #e94560;
+}
+.close-side-box {
+  width: 0;
+}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .company {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .searchbar {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 0.25rem;
+  }
+  .icons {
+    width: 100%;
+    /* margin: 0 auto; */
+    justify-content: center;
+  }
+  .cart-side-box {
+    width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  .cart-side-box {
+    width: 60%;
+  }
 }
