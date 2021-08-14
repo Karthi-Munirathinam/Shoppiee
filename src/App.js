@@ -19,7 +19,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '24%',
       finalPrice: '18999.00',
-      reviewStars: '4.5',
+      reviewStars: 4.5,
       totalReviews: '4245',
       count: 1
     },
@@ -32,7 +32,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '10%',
       finalPrice: '25200.00',
-      reviewStars: '4',
+      reviewStars: 4,
       totalReviews: '3142',
       count: 1
     },
@@ -45,7 +45,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '4%',
       finalPrice: '42900.00',
-      reviewStars: '4.5',
+      reviewStars: 4.5,
       totalReviews: '4535',
       count: 1
     },
@@ -58,7 +58,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '9%',
       finalPrice: '39900.00',
-      reviewStars: '4.5',
+      reviewStars: 4.5,
       totalReviews: '1430',
       count: 1
     },
@@ -71,7 +71,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '2%',
       finalPrice: '14699.00',
-      reviewStars: '4',
+      reviewStars: 4,
       totalReviews: '5423',
       count: 1
     },
@@ -84,7 +84,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '13%',
       finalPrice: '47900.00',
-      reviewStars: '5',
+      reviewStars: 5,
       totalReviews: '1036',
       count: 1
     },
@@ -97,7 +97,7 @@ function App() {
       isDiscountAvailable: true,
       discount: '14%',
       finalPrice: '72999.00',
-      reviewStars: '4.5',
+      reviewStars: 4.5,
       totalReviews: '4965',
       count: 1
     },
@@ -110,58 +110,64 @@ function App() {
       isDiscountAvailable: true,
       discount: '18%',
       finalPrice: '105999.00',
-      reviewStars: '4',
+      reviewStars: 4,
       totalReviews: '559',
       count: 1
     }
   ]);
   const [opencart, setopencart] = useState(false);
-  const [cartCount, setcartCount] = useState(0);
   const [cartItems, setcartItems] = useState([]);
-  const [totalvalues, settotalvalues] = useState(0)
-
+  const [totalvalues, settotalvalues] = useState(0);
 
   let openCart = () => {
-    console.log(opencart)
+    // console.log(opencart)
     return setopencart(!opencart);
   }
 
   let incrementItemsCount = (id) => {
-    let findincindex = dataitems.findIndex(obj => obj.id == id);
+    let findincindex = dataitems.findIndex(obj => obj.id === id);
     dataitems[findincindex].count = dataitems[findincindex].count + 1;
-    return setdataitems([...dataitems]);
+    setdataitems([...dataitems]);
   }
   let decrementItemsCount = (id) => {
-    let finddecindex = dataitems.findIndex(obj => obj.id == id);
+    let finddecindex = dataitems.findIndex(obj => obj.id === id);
     dataitems[finddecindex].count = dataitems[finddecindex].count - 1;
-    return dataitems[finddecindex].count > 0 ? setdataitems([...dataitems]) : dataitems[finddecindex].count = 1;
+    dataitems[finddecindex].count > 0 ? setdataitems([...dataitems]) : dataitems[finddecindex].count = 1;
+  }
+  let totalcalc = () => {
+    // console.log(arr)
+    let ftotal = cartItems.reduce((acc, obj) => {
+      return acc + (obj.count * obj.finalPrice);
+    }, 0);
+    settotalvalues(ftotal);
   }
   let addcartItems = (id) => {
-    let findcartIndex = dataitems.findIndex(obj => obj.id == id);
-    let checkoutvalues = totalvalues + (parseInt(dataitems[findcartIndex].count) * parseFloat(dataitems[findcartIndex].finalPrice));
-    settotalvalues(checkoutvalues);
-    setcartCount(cartCount + 1);
-    return setcartItems([...cartItems, dataitems[findcartIndex]]);
+    let finddataIndex = dataitems.findIndex(obj => obj.id === id);
+    let findcartIndex = cartItems.findIndex(obj => obj.id === id);
+    cartItems[findcartIndex] = dataitems[finddataIndex];
+    let finaldata = findcartIndex >= 0 ? [...cartItems] : [...cartItems, dataitems[finddataIndex]];
+    setcartItems(finaldata);
+    // totalcalc();
   }
 
+
+
   let cartitemclose = (id) => {
-    let finditemIndex = cartItems.findIndex(obj => obj.id == id);
-    let checkinvalues = totalvalues - (parseInt(dataitems[finditemIndex].count) * parseFloat(dataitems[finditemIndex].finalPrice));
-    settotalvalues(checkinvalues);
-    setcartCount(cartCount - 1);
+    let finditemIndex = cartItems.findIndex(obj => obj.id === id);
     cartItems.splice(finditemIndex, 1);
     setcartItems([...cartItems]);
+    totalcalc();
   }
   return (
     <div className="App" >
 
       <div className="mainnav">
         <div className="container-fluid " >
-          <Navbar handleCart={openCart} count={cartCount} />
+          <Navbar handleCart={openCart} count={cartItems.length} />
         </div>
       </div>
       <span>
-        <Cartblock status={opencart} count={cartCount} items={cartItems} finaltotal={totalvalues} handleclose={cartitemclose} />
+        <Cartblock status={opencart} items={cartItems} finaltotal={totalvalues} handleclose={cartitemclose} handlecalc={totalcalc} />
       </span>
       <div className="container mt-3">
         <h4 className="flashSales"><span className="flash-icon">
@@ -169,7 +175,7 @@ function App() {
         </span>Flash Deals</h4>
         <div className="row">
           {dataitems.map((obj) => {
-            return <Card Data={obj} handleinc={incrementItemsCount} handledec={decrementItemsCount} handleCart={addcartItems} />
+            return <Card key={obj.id} Data={obj} handleinc={incrementItemsCount} handledec={decrementItemsCount} handleCart={addcartItems} handletotal={totalcalc} />
           })
           }
         </div>

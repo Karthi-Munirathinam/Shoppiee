@@ -16,9 +16,9 @@ export default function Card(props) {
                         <p className="review"><Rating name="half-rating-read" defaultValue={props.Data.reviewStars} precision={0.5} readOnly /><span className="number">({props.Data.totalReviews})</span></p>
                         <p className="price"><span className="finalprice">Rs. {props.Data.finalPrice}</span><span className="originalprice">{props.Data.originalPrice}</span></p>
                         <div className="numberofitems">
-                            <IconButton className="decreasebtn" aria-label="decrease item" onClick={() => { props.handledec(props.Data.id) }}><RemoveRoundedIcon style={{ color: '#e94560' }} /></IconButton>
+                            <IconButton className="decreasebtn" aria-label="decrease item" onClick={() => props.handledec(props.Data.id)}><RemoveRoundedIcon style={{ color: '#e94560' }} /></IconButton>
                             <span className="count">{props.Data.count}</span>
-                            <IconButton className="increasebtn" aria-label="increase item" onClick={() => { props.handleinc(props.Data.id) }}><AddRoundedIcon style={{ color: '#e94560' }} /></IconButton>
+                            <IconButton className="increasebtn" aria-label="increase item" onClick={() => props.handleinc(props.Data.id)}><AddRoundedIcon style={{ color: '#e94560' }} /></IconButton>
                         </div>
                         <div className="cartadd"><button className="btn btn-outline-danger" onClick={() => props.handleCart(props.Data.id)}>Add to cart</button></div>
                     </div>

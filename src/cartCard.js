@@ -21,7 +21,7 @@ export default function CartCard({ data, handlecartclose }) {
                                 </div>
                                 <div className='row pricerow'>
                                     <div className='col-12'>
-                                        <span>{data.count} x {data.finalPrice} =</span> <span className="cartprice">Rs. {parseInt(data.count) * parseFloat(data.finalPrice)}</span>
+                                        <span>{data.count} x {data.finalPrice} =</span> <span className="cartprice" >Rs.{parseInt(data.count) * parseFloat(data.finalPrice)}</span>
                                     </div>
                                 </div>
 
@@ -29,7 +29,7 @@ export default function CartCard({ data, handlecartclose }) {
                         </div>
                     </Card>
                 </div>
-            </div>
+            </div >
 
         </>
     )
